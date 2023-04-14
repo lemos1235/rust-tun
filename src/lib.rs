@@ -12,32 +12,6 @@
 //
 //  0. You just DO WHAT THE FUCK YOU WANT TO.
 
-mod error;
-pub use crate::error::*;
-
-mod address;
-pub use crate::address::IntoAddress;
-
-mod device;
-pub use crate::device::Device;
-
-mod configuration;
-pub use crate::configuration::{Configuration, Layer};
-
-pub mod platform;
-pub use crate::platform::create;
-
-#[cfg(all(
-    feature = "async",
-    any(
-        target_os = "linux",
-        target_os = "macos",
-        target_os = "ios",
-        target_os = "android",
-        target_os = "windows",
-    )
-))]
-pub mod r#async;
 #[cfg(all(
     feature = "async",
     any(
@@ -50,6 +24,28 @@ pub mod r#async;
 ))]
 pub use r#async::*;
 
+pub use crate::address::IntoAddress;
+pub use crate::configuration::{Configuration, Layer};
+pub use crate::device::Device;
+pub use crate::error::*;
+pub use crate::platform::create;
+
+mod address;
+#[cfg(all(
+    feature = "async",
+    any(
+        target_os = "linux",
+        target_os = "macos",
+        target_os = "ios",
+        target_os = "android",
+        target_os = "windows",
+    )
+))]
+pub mod r#async;
+mod configuration;
+mod device;
+mod error;
+pub mod platform;
 
 pub fn configure() -> Configuration {
     Configuration::default()

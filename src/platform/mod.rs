@@ -40,7 +40,7 @@ pub use self::android::{create, Configuration, Device, Queue};
 #[cfg(target_os = "windows")]
 pub mod windows;
 #[cfg(target_os = "windows")]
-pub use self::windows::{create, Configuration, Device, Queue};
+pub use self::windows::{create, Configuration, Device};
 
 #[cfg(test)]
 mod test {
@@ -58,7 +58,7 @@ mod test {
                 .mtu(1400)
                 .up(),
         )
-        .unwrap();
+            .unwrap();
 
         assert_eq!(
             "192.168.50.1".parse::<Ipv4Addr>().unwrap(),
